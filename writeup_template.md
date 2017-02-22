@@ -39,11 +39,11 @@ Convert the color image to grayscale using the predefined _grayscale_ method. Op
 ![alt text][writeup2]
 
 ####3 Apply gauss filter
-A gauss filter will blur the image to get better results in the canny filter
+A gauss filter will blur the image to supress the noise by averaging surrounding pixel values.
 ![alt text][writeup3]
 
 ####4 Canny filtering
-The Canny function generated an image of dots.
+The canny filter will calculate gradient values for all pixels (represents the amount of change in colour between surrounding pixels). The higher the gradient the brighter the pixel.
 ![alt text][writeup4]
 
 ####5 Region of interest
@@ -59,15 +59,11 @@ Finally, printing the result on the original image gives the following final res
 ![alt text][writeup7]
 
 ###2. Identify potential shortcomings with your current pipeline
-
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
+* the slope of the lines is limited to some hardcoded values.
+* to find the min and max y values to draw the lines, I search for those values in the lines from the Hough transformation. This means that if there's no lines or only partial lines at both sides, my current algorithm won't show a full line
+* I calculate average values, but mean values might be a better choice
 
 ###3. Suggest possible improvements to your pipeline
-
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+* The shortcomings mentioned above should be solved
+* region of interest should be applied as soon as possible in the pipeline not to waste CPU cycles. Problem is that if this is applied before the canny function, the edges of this region will also classify as detected lines
+* region of interest might be applied not only on the outside of lines, but also on the inside of lines, although I'm not sure it will have a big/any impact
